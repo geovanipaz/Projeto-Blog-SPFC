@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Perfil
+{% endblock title %}
+
+{% block body_block %}
+    <h1>Perfil de {{request.user.username}}</h1>
+    <p>Username: {{user.username}}</p>
+    <p>Email: {{user.email}}</p>
+    <p>Nome: {{user.first_name}} {{user.last_name}}</p>
+    <br>
+    <a class="btn btn-warning btn-sm" 
+    href="{% url 'app_login:edita_perfil' %}">Editar Perfil</a>
+{% endblock %}

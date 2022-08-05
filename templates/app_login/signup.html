@@ -8,7 +8,7 @@
 
     {% if registrado %}
       <div class="alert alert-success">
-        Conta criada com Sucesso <a href="{% url 'login:login'%}">Login</a>
+        Conta criada com Sucesso <a href="{% url 'app_login:login'%}">Login</a>
       </div>
 
     {% else %}
@@ -20,7 +20,7 @@
             <button type="submit" class="btn btn-success btn-sm">Criar Conta</button>
         </form>
             <br>
-        <p>Já possui uma conta?</p> <a href="{% url 'login:login'%}">Login</a>
+        <p>Já possui uma conta?</p> <a href="{% url 'app_login:login'%}">Login</a>
 
     {% endif %}
    

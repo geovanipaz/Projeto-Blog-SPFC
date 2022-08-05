@@ -28,11 +28,16 @@
         <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             {% if user.is_authenticated %}
+              <!--
               <li class="nav-item active"> 
                 <a class="nav-link" href="{% url 'blog:lista_blog' %}">Home</a>
               </li>
+            -->
               <li class="nav-item active"> 
-                <a class="nav-link" href="{% url 'login:logout' %}">Sair</a>
+                <a class="nav-link" href="{% url 'app_login:perfil' %}">Perfil</a>
+              </li>
+              <li class="nav-item active"> 
+                <a class="nav-link" href="{% url 'app_login:logout' %}">Sair</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
@@ -44,10 +49,10 @@
               </li>
             {% else %}
               <li class="nav-item active"> 
-                <a class="nav-link" href="{% url 'login:signup' %}">Registrar</a>
+                <a class="nav-link" href="{% url 'app_login:signup' %}">Registrar</a>
               </li>
               <li class="nav-item active"> 
-                <a class="nav-link" href="{% url 'login:login' %}">Login</a>
+                <a class="nav-link" href="{% url 'app_login:login' %}">Login</a>
               </li>
             {% endif %}
             
@@ -59,29 +64,8 @@
         </div>
       </div>
     </nav>
-    <!--
-    <nav class="navbar navbar-expand-sm bg-danger navbar-dark">
-        <ul class="navbar-nav">
-            <li class="nav-item active"> 
-                <a class="nav-link" href="{% url 'blog:lista_blog' %}">Home</a>
-            </li>
-            <li class="nav-item active"> 
-              <a class="nav-link" href="{% url 'login:signup' %}">Registrar</a>
-            </li>
-            <li class="nav-item active"> 
-              <a class="nav-link" href="{% url 'login:login' %}">Login</a>
-            </li>
-            <li class="nav-item active"> 
-              <a class="nav-link" href="{% url 'login:logout' %}">Sair</a>
-            </li>
-            
-        </ul>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
-    </nav>
-    -->
+    
+    <br><br><br>
     
 
     <div class="container" style="padding-top 20px;">
