@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}
+  Trocar Senha
+{% endblock title %}
+
+{% block body_block %}
+    {% if mudada %}
+        <div class="alert alert-success">
+            Senha Trocada com sucesso!!!
+        </div>
+    {% endif %}
+    <h1>Mudar a senha</h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{form|crispy}}
+            <button type="submit" class="btn btn-primary btn-sm">OK</button>
+        </form>
+    
+    
+{% endblock %}

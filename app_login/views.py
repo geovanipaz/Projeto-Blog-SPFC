@@ -1,6 +1,6 @@
 
 from django.shortcuts import render, HttpResponseRedirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, PasswordChangeForm
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -53,3 +53,15 @@ def edita_usuario(request):
             form = UserProfileChange(instance=usuario_atual)
     return render(request,'app_login/edita_perfil.html', context={'form':form})
     
+@login_required
+def muda_senha(request):
+    usuario_atual = request.user
+    mudada = False
+    form = PasswordChangeForm(usuario_atual)
+    if request.method == 'POST':
+        form = PasswordChangeForm(usuario_atual, data=request.POST)
+        if form.is_valid():
+            form.save()
+            mudada = True
+    return render(request, 'app_login/muda_senha.html', context={
+        'form':form, 'mudada':mudada})
