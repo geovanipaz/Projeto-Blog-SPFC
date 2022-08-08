@@ -4,7 +4,7 @@ from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, Pass
 from django.contrib.auth import login, authenticate, logout
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from app_login.forms import SignUpForm, UserProfileChange
+from app_login.forms import SignUpForm, UserProfileChange, FotoPerfilForm
 # Create your views here.
 
 
@@ -65,3 +65,29 @@ def muda_senha(request):
             mudada = True
     return render(request, 'app_login/muda_senha.html', context={
         'form':form, 'mudada':mudada})
+    
+@login_required
+def adiciona_foto_perfil(request):
+    form = FotoPerfilForm()
+    if request.method == 'POST':
+        form = FotoPerfilForm(request.POST, request.FILES)
+        if form.is_valid():
+            usuario_obg = form.save(commit=False)
+            usuario_obg.usuario = request.user
+            usuario_obg.save()
+            return HttpResponseRedirect(reverse('app_login:perfil'))
+    return render(request,'app_login/adiciona_foto_perfil.html',
+                  context={'form':form})
+    
+@login_required
+def mudar_foto_perfil(request):
+    form = FotoPerfilForm(instance=request.user.perfil)
+    if request.method == 'POST':
+        form = FotoPerfilForm(
+            request.POST, request.FILES, instance=request.user.perfil
+        )
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse('app_login:perfil'))
+    return render(request,'app_login/adiciona_foto_perfil.html',
+                  context={'form':form})

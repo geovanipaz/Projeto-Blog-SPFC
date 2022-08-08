@@ -6,6 +6,19 @@
 
 {% block body_block %}
     <h1>Perfil de {{request.user.username}}</h1>
+    {% if user.perfil %}
+      <img src="/media/{{user.perfil.foto_perfil}}"
+       class="rounded-circle" width="120px" alt="">
+       <br>
+       <a class="btn btn-info btn-sm" 
+      href="{% url 'app_login:trocar_foto_perfil' %}">Alterar Foto</a>
+    {% else %}
+      <img src="/media/perfil.jpg" 
+      class="rounded-circle" width="120px" alt="">
+      <br>
+      <a class="btn btn-info btn-sm" 
+      href="{% url 'app_login:add_foto_perfil' %}">Adicionar</a>
+    {% endif %}
     <p>Username: {{user.username}}</p>
     <p>Email: {{user.email}}</p>
     <p>Nome: {{user.first_name}} {{user.last_name}}</p>
