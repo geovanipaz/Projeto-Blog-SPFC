@@ -8,15 +8,25 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import CriaBlogForm
 import uuid
+from django.db.models import Q
 
 # Create your views here.
 
 def lista_blog(request, pk = None):
     blogs = Blog.objects.all()
     categorias = Categoria.objects.all()
+    
+    q = request.GET.get('busca')
+    
     if pk:
         categoria = Categoria.objects.get(id=pk)
         blogs = blogs.filter(categoria=categoria)
+    
+    if q:
+        blogs = blogs.filter(
+            Q(blog_titulo__icontains=q)|
+            Q(blog_conteudo__icontains=q)
+        )
     context={
         'blogs': blogs,
         'categorias':categorias
