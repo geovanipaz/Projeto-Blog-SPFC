@@ -20,6 +20,7 @@
     
         <div class="col-sm-8">
           <p>{{blog.blog_conteudo|range_filter|linebreaks}}</p>
+          <a href="{% url 'blog:blog_detalhe' blog.slug %}">Leia mais</a>
           <h6>Postado por: <a href="">{{blog.autor}}</a></h6>
         </div>
       </div>

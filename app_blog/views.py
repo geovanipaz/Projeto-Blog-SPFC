@@ -46,3 +46,9 @@ def cria_blog(request):
             return HttpResponseRedirect(reverse('blog:lista_blog'))
     context = {'form':form}
     return render(request, 'app_blog/cria_blog.html', context)
+
+@login_required
+def blog_detalhe(request, slug):
+    blog = Blog.objects.get(slug=slug)
+    context = {'blog':blog}
+    return render(request,'app_blog/blog_detalhe.html', context)

@@ -5,6 +5,18 @@
 {% endblock title %}
 
 {% block body_block %}
-  
+  <div class="row">
+    <div class="col-sm-6">
+      <h2>{{blog.blog_titulo}}</h2>
+      <h4>Postado por: {{blog.autor}}</h4>
+      <i><h6>Publicado em: {{blog.data_publicacao}}</h6></i>
+      <i><h6>Publicado em: {{blog.data_atualizacao}}</h6></i>
+    </div>
+
+    <div class="col-sm-6">
+      <img src="/media/{{blog.blog_imagem}}" width="100%">
+    </div>
+    {{blog.blog_conteudo|linebreaks}}
+  </div>
   
 {% endblock body_block %}
