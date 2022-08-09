@@ -46,7 +46,9 @@
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                 <ul class="dropdown-menu">
                   {% for categoria in categorias %}
-                    <li><a class="dropdown-item" href="#">{{categoria.nome_categoria}}</a></li>
+                    <li><a class="dropdown-item" 
+                      href="{% url 'blog:lista_por_categoria' categoria.id%}">
+                      {{categoria.nome_categoria}}</a></li>
                   {% endfor %}
                 </ul>
               </li>

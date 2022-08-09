@@ -11,9 +11,12 @@ import uuid
 
 # Create your views here.
 
-def lista_blog(request):
+def lista_blog(request, pk = None):
     blogs = Blog.objects.all()
     categorias = Categoria.objects.all()
+    if pk:
+        categoria = Categoria.objects.get(id=pk)
+        blogs = blogs.filter(categoria=categoria)
     context={
         'blogs': blogs,
         'categorias':categorias
