@@ -23,6 +23,9 @@ class Blog(models.Model):
     data_publicacao = models.DateTimeField(auto_now_add=True)
     data_atualizacao = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        ordering = ['-data_publicacao']
+    
     def __str__(self):
         return self.blog_titulo
     

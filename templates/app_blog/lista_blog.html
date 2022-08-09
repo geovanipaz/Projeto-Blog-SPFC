@@ -1,10 +1,29 @@
 {% extends 'base.html' %}
 
+{% load custom_filters %}
+
 {% block title %}
-  
+  Lista de blogs
 {% endblock title %}
 
 {% block body_block %}
-  <h1>Lista de blogs</h1>
+  
+  <ul>
+    {% for blog in blogs %}
+      <h2>{{blog.blog_titulo}}</h2>
+      <h6><i>{{blog.data_publicacao}}</i></h6>
+      <div class="row">
+        <div class="col-sm-4">
+          <img src="/media/{{blog.blog_imagem}}" alt="{{blog.blog_titulo}}" 
+          title="{{blog.blog_titulo}}" width="100%">
+        </div>
+    
+        <div class="col-sm-8">
+          <p>{{blog.blog_conteudo|range_filter|linebreaks}}</p>
+          <h6>Postado por: <a href="">{{blog.autor}}</a></h6>
+        </div>
+      </div>
+    {% endfor %}
+  </ul>
   
 {% endblock body_block %}

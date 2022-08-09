@@ -37,14 +37,17 @@
                 <a class="nav-link" href="{% url 'app_login:perfil' %}">Perfil</a>
               </li>
               <li class="nav-item active"> 
+                <a class="nav-link" href="{% url 'blog:cria_blog' %}">Criar Blog</a>
+              </li>
+              <li class="nav-item active"> 
                 <a class="nav-link" href="{% url 'app_login:logout' %}">Sair</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Categorias</a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Action</a></li>
-                  <li><a class="dropdown-item" href="#">Another action</a></li>
-                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                  {% for categoria in categorias %}
+                    <li><a class="dropdown-item" href="#">{{categoria.nome_categoria}}</a></li>
+                  {% endfor %}
                 </ul>
               </li>
               {% if user.is_authenticated %}
