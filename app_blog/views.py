@@ -6,7 +6,7 @@ from .models import Blog, Categoria, Comentario, Gostei
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .forms import CriaBlogForm
+from .forms import CriaBlogForm, ComentarioForm
 import uuid
 from django.db.models import Q
 
@@ -50,5 +50,14 @@ def cria_blog(request):
 @login_required
 def blog_detalhe(request, slug):
     blog = Blog.objects.get(slug=slug)
-    context = {'blog':blog}
+    form = ComentarioForm()
+    if request.method == 'POST':
+        form = ComentarioForm(request.POST)
+        if form.is_valid():
+            comentario = form.save(commit=False)
+            comentario.usuario = request.user
+            comentario.blog = blog
+            comentario.save()
+            return HttpResponseRedirect(reverse('blog:blog_detalhe', kwargs={'slug':slug}))
+    context = {'blog':blog, 'form':form}
     return render(request,'app_blog/blog_detalhe.html', context)

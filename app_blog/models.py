@@ -37,6 +37,12 @@ class Comentario(models.Model):
     comentario = models.TextField()
     data_comentario = models.DateTimeField(auto_now_add=True)
     
+    class Meta:
+        ordering = ['-data_comentario']
+    
+    def __str__(self):
+        return self.comentario
+    
 class Gostei(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, 
                              related_name='gostei_blog')

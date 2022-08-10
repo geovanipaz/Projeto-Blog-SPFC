@@ -7,3 +7,8 @@ class CriaBlogForm(forms.ModelForm):
     class Meta:
         model = Blog
         fields = ('blog_titulo', 'categoria', 'blog_conteudo', 'blog_imagem')
+        
+class ComentarioForm(forms.ModelForm):
+    class Meta:
+        model = Comentario
+        fields = ('comentario',)
