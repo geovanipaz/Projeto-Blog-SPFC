@@ -51,6 +51,12 @@ def cria_blog(request):
 def blog_detalhe(request, slug):
     blog = Blog.objects.get(slug=slug)
     form = ComentarioForm()
+    ja_gostado = Gostei.objects.filter(blog=blog, usuario=request.user)
+    if ja_gostado:
+        gostado = True
+    else:
+        gostado = False
+    
     if request.method == 'POST':
         form = ComentarioForm(request.POST)
         if form.is_valid():
@@ -59,5 +65,21 @@ def blog_detalhe(request, slug):
             comentario.blog = blog
             comentario.save()
             return HttpResponseRedirect(reverse('blog:blog_detalhe', kwargs={'slug':slug}))
-    context = {'blog':blog, 'form':form}
+    context = {'blog':blog, 'form':form,'gostado':gostado}
     return render(request,'app_blog/blog_detalhe.html', context)
+
+def gostar(request, pk):
+    blog = Blog.objects.get(pk=pk)
+    usuario = request.user
+    ja_gostados = Gostei.objects.filter(blog=blog, usuario=usuario)
+    if not ja_gostados:
+        blog_gostado = Gostei(blog=blog, usuario=usuario)
+        blog_gostado.save()
+    return HttpResponseRedirect(reverse('blog:blog_detalhe', kwargs={'slug':blog.slug}))
+
+def desgostar(request, pk):
+    blog = Blog.objects.get(pk=pk)
+    usuario = request.user
+    ja_gostados = Gostei.objects.filter(blog=blog, usuario=usuario)
+    ja_gostados.delete()
+    return HttpResponseRedirect(reverse('blog:blog_detalhe', kwargs={'slug':blog.slug}))

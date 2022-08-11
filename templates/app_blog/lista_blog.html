@@ -22,6 +22,9 @@
           <p>{{blog.blog_conteudo|range_filter|linebreaks}}</p>
           <a href="{% url 'blog:blog_detalhe' blog.slug %}">Leia mais</a>
           <h6>Postado por: <a href="">{{blog.autor}}</a></h6>
+          <h6>{{blog.gostei_blog.count}} pessoa(s) gostaram | 
+            {{blog.blog_comentario.count}} comentários
+          </h6>
         </div>
       </div>
     {% endfor %}

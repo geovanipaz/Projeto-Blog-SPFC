@@ -8,5 +8,7 @@ urlpatterns = [
     path('', views.lista_blog, name='lista_blog'),
     path('categoria/<pk>/', views.lista_blog, name='lista_por_categoria'),
     path('cria_blog/', views.cria_blog, name='cria_blog'),
-    path('<slug>/', views.blog_detalhe, name='blog_detalhe')
+    path('<slug>/', views.blog_detalhe, name='blog_detalhe'),
+    path('gostar/<pk>/', views.gostar, name='gostar'),
+    path('desgostar/<pk>/', views.desgostar, name='desgostar')
 ]

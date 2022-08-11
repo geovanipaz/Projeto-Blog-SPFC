@@ -12,6 +12,9 @@
       <h4>Postado por: {{blog.autor}}</h4>
       <i><h6>Publicado em: {{blog.data_publicacao}}</h6></i>
       <i><h6>Publicado em: {{blog.data_atualizacao}}</h6></i>
+      <h6>{{blog.gostei_blog.count}} pessoa(s) gostaram | 
+        {{blog.blog_comentario.count}} comentários
+      </h6>
     </div>
 
     <div class="col-sm-6">
@@ -19,6 +22,18 @@
     </div>
     {{blog.blog_conteudo|linebreaks}}
   </div>
+  <hr>
+
+  {% if not gostado %}
+  <a href="{% url 'blog:gostar' blog.pk %}">
+    <i class="bi bi-hand-thumbs-up" style="font-size:48px;"></i>
+  </a>
+  {% else %}
+  <a href="{% url 'blog:desgostar' blog.pk %}">
+    <i class="bi bi-hand-thumbs-up-fill" style="font-size:48px;"></i>
+  </a>
+  {% endif %}
+
 
   <div class="row">
     <div class="col-sm-6">
